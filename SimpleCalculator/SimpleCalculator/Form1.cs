@@ -122,6 +122,7 @@ namespace SimpleCalculator
                 MessageBoxWarninDivideMultiply();
                 return;
             }
+           
             if (ValidatingRightOperators(tbInput))
             {
                 return;
@@ -149,9 +150,12 @@ namespace SimpleCalculator
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            if (ValidatingRightOperators(tbInput))
+            if (tbInput.Text != string.Empty)
             {
-                return;
+                if (ValidatingRightOperators(tbInput))
+                {
+                    return;
+                }
             }
             tbInput.Text += " + ";
             dotUsed = false;
@@ -186,6 +190,81 @@ namespace SimpleCalculator
             return false;
         }
 
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+            string text = tbInput.Text;
+           
 
+            List<string> separated = text.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries).ToList();
+            if (separated[0]=="")
+            {
+                separated.RemoveAt(0);
+            }
+            if ((separated[0])=="+" ||separated[0] == "-")
+            {
+                separated[0] += separated[1];
+                separated.RemoveAt(1);
+            }
+            else
+            {
+                while (separated.Contains("*") || separated.Contains("/") || separated.Contains("+") || separated.Contains("-"))
+                {
+                    if (separated.Contains("*"))
+                    {
+                        int indexOfStar = separated.IndexOf("*");
+                        double number = double.Parse(separated[indexOfStar - 1]) * double.Parse(separated[indexOfStar + 1]);
+                        separated.Insert(indexOfStar + 2, number.ToString());
+                        separated.RemoveRange(indexOfStar - 1, 3);
+                    }
+                    else if (separated.Contains("/"))
+                    {
+                        int indexOfDivide = separated.IndexOf("/");
+
+                        double number = double.Parse(separated[indexOfDivide - 1]) / double.Parse(separated[indexOfDivide + 1]);
+                        separated.Insert(indexOfDivide + 2, number.ToString());
+                        separated.RemoveRange(indexOfDivide - 1, 3);
+                    }
+                    else if (separated.Contains("+"))
+                    {
+                        int indexOfPlus = separated.IndexOf("+");
+                        double number = double.Parse(separated[indexOfPlus - 1]) + double.Parse(separated[indexOfPlus + 1]);
+                        separated.Insert(indexOfPlus + 2, number.ToString());
+                        separated.RemoveRange(indexOfPlus - 1, 3);
+                    }
+                    else if (separated.Contains("-"))
+                    {
+                        int indexOfMinus = separated.IndexOf("-");
+                        double number = double.Parse(separated[indexOfMinus - 1]) - double.Parse(separated[indexOfMinus + 1]);
+                        separated.Insert(indexOfMinus + 2, number.ToString());
+                        separated.RemoveRange(indexOfMinus - 1, 3);
+                    }
+
+                }
+            }
+
+            lblResult.Text = $"{double.Parse(separated[0]):f2}";
+            tbInput.Clear();
+        }
+
+        private void btnBackspace_Click(object sender, EventArgs e)
+        {
+            if (tbInput.Text.Length>1)
+            {
+                if (tbInput.Text[tbInput.Text.Length - 1] == ' ')
+                {
+                    tbInput.Text = tbInput.Text.Substring(0, tbInput.Text.Length - 3);
+                }
+                else
+                {
+                    tbInput.Text = tbInput.Text.Substring(0, tbInput.Text.Length - 1);
+                }
+            }
+            else
+            {
+                tbInput.Text = string.Empty;
+            }
+            
+            
+        }
     }
 }

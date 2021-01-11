@@ -29,6 +29,7 @@ namespace SimpleCalculator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -169,6 +170,7 @@ namespace SimpleCalculator
             this.btnCalc.TabIndex = 11;
             this.btnCalc.Text = "=";
             this.btnCalc.UseVisualStyleBackColor = true;
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
             // btnDivide
             // 
@@ -228,6 +230,7 @@ namespace SimpleCalculator
             this.btnBackspace.TabIndex = 17;
             this.btnBackspace.Text = "<------";
             this.btnBackspace.UseVisualStyleBackColor = true;
+            this.btnBackspace.Click += new System.EventHandler(this.btnBackspace_Click);
             // 
             // tbInput
             // 
@@ -270,6 +273,7 @@ namespace SimpleCalculator
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Calculator";
             this.ResumeLayout(false);
