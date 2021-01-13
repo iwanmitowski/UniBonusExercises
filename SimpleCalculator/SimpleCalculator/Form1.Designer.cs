@@ -29,6 +29,7 @@ namespace SimpleCalculator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -50,6 +51,10 @@ namespace SimpleCalculator
             this.btnBackspace = new System.Windows.Forms.Button();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.lblResult = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnSqrt = new System.Windows.Forms.Button();
+            this.btnPower = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -214,7 +219,7 @@ namespace SimpleCalculator
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(264, 71);
+            this.btnClear.Location = new System.Drawing.Point(185, 71);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(63, 27);
             this.btnClear.TabIndex = 16;
@@ -224,7 +229,7 @@ namespace SimpleCalculator
             // 
             // btnBackspace
             // 
-            this.btnBackspace.Location = new System.Drawing.Point(185, 71);
+            this.btnBackspace.Location = new System.Drawing.Point(185, 29);
             this.btnBackspace.Name = "btnBackspace";
             this.btnBackspace.Size = new System.Drawing.Size(63, 27);
             this.btnBackspace.TabIndex = 17;
@@ -236,6 +241,7 @@ namespace SimpleCalculator
             // 
             this.tbInput.Location = new System.Drawing.Point(27, 71);
             this.tbInput.Name = "tbInput";
+            this.tbInput.ReadOnly = true;
             this.tbInput.Size = new System.Drawing.Size(149, 20);
             this.tbInput.TabIndex = 18;
             // 
@@ -248,11 +254,37 @@ namespace SimpleCalculator
             this.lblResult.TabIndex = 19;
             this.lblResult.Text = "Output";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // btnSqrt
+            // 
+            this.btnSqrt.Location = new System.Drawing.Point(264, 71);
+            this.btnSqrt.Name = "btnSqrt";
+            this.btnSqrt.Size = new System.Drawing.Size(63, 27);
+            this.btnSqrt.TabIndex = 20;
+            this.btnSqrt.Text = "√";
+            this.btnSqrt.UseVisualStyleBackColor = true;
+            this.btnSqrt.Click += new System.EventHandler(this.btnSqrt_Click);
+            // 
+            // btnPower
+            // 
+            this.btnPower.Location = new System.Drawing.Point(264, 29);
+            this.btnPower.Name = "btnPower";
+            this.btnPower.Size = new System.Drawing.Size(63, 27);
+            this.btnPower.TabIndex = 21;
+            this.btnPower.Text = "^";
+            this.btnPower.UseVisualStyleBackColor = true;
+            this.btnPower.Click += new System.EventHandler(this.btnPower_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(358, 292);
+            this.Controls.Add(this.btnPower);
+            this.Controls.Add(this.btnSqrt);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.tbInput);
             this.Controls.Add(this.btnBackspace);
@@ -276,6 +308,7 @@ namespace SimpleCalculator
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Calculator";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,6 +336,9 @@ namespace SimpleCalculator
         private System.Windows.Forms.Button btnBackspace;
         private System.Windows.Forms.TextBox tbInput;
         private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnPower;
+        private System.Windows.Forms.Button btnSqrt;
     }
 }
 

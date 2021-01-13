@@ -12,10 +12,12 @@ namespace SimpleCalculator
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -92,16 +94,46 @@ namespace SimpleCalculator
             }
 
         }
+        private void btnPower_Click(object sender, EventArgs e)
+        {
+            //cant start with *
+            if (tbInput.Text == string.Empty)
+            {
+                MessageBoxWarninDivideMultiplyPower();
+                return;
+            }
 
+            if (ValidatingRightOperators(tbInput))
+            {
+                return;
+            }
+
+            tbInput.Text += " ^ ";
+
+            dotUsed = false;
+        }
+        private void btnSqrt_Click(object sender, EventArgs e)
+        {
+            //if (tbInput.Text != string.Empty)
+            //{
+            //    if (ValidatingRightOperators(tbInput))
+            //    {
+            //        return;
+            //    }
+            //}
+            tbInput.Text += " √ ";
+            dotUsed = false;
+        }
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
             //cant start with /
             if (tbInput.Text == string.Empty)
             {
-                MessageBoxWarninDivideMultiply();
+                MessageBoxWarninDivideMultiplyPower();
                 return;
             }
+
             if (ValidatingRightOperators(tbInput))
             {
                 return;
@@ -110,7 +142,7 @@ namespace SimpleCalculator
 
             tbInput.Text += " / ";
 
-            dotUsed = false;
+
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
@@ -119,7 +151,7 @@ namespace SimpleCalculator
             //cant start with *
             if (tbInput.Text == string.Empty)
             {
-                MessageBoxWarninDivideMultiply();
+                MessageBoxWarninDivideMultiplyPower();
                 return;
             }
 
@@ -143,13 +175,23 @@ namespace SimpleCalculator
                     return;
                 }
             }
-
+            if (tbInput.Text.Contains('√'))
+            {
+                if (tbInput.Text[tbInput.Text.Length - 2] == '√')
+                {
+                    MessageBox.Show("Коренът не може да е отрицателно число", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+           
             tbInput.Text += " - ";
             dotUsed = false;
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
             if (tbInput.Text != string.Empty)
             {
                 if (ValidatingRightOperators(tbInput))
@@ -159,6 +201,12 @@ namespace SimpleCalculator
             }
             tbInput.Text += " + ";
             dotUsed = false;
+            // Set focus to control
+            tbInput.Focus();
+            // Set text-selection to end
+            tbInput.SelectionStart = tbInput.Text.Length == 0 ? 0 : tbInput.Text.Length - 1;
+            // Set text-selection length (in your case 0 = no blue text)
+            tbInput.SelectionLength = 0;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -166,7 +214,7 @@ namespace SimpleCalculator
             tbInput.Clear();
         }
 
-        public static void MessageBoxWarninDivideMultiply()
+        public static void MessageBoxWarninDivideMultiplyPower()
         {
             MessageBox.Show("Не може уравнението да започва с този знак", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -178,10 +226,15 @@ namespace SimpleCalculator
 
         public static bool ValidatingRightOperators(TextBox tbInput)
         {
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
             if (tbInput.Text[tbInput.Text.Length - 1] == ' ' && (tbInput.Text[tbInput.Text.Length - 2] == '*'
                 || tbInput.Text[tbInput.Text.Length - 2] == '/'
                 || tbInput.Text[tbInput.Text.Length - 2] == '+'
-                || tbInput.Text[tbInput.Text.Length - 2] == '-'))
+                || tbInput.Text[tbInput.Text.Length - 2] == '-'
+                || tbInput.Text[tbInput.Text.Length - 2] == '^'
+               
+                ))
             {
                 MessageBoxCantTwoOperators();
                 return true;
@@ -192,57 +245,119 @@ namespace SimpleCalculator
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            //keyboard input, mixed input TO DO!
-            string text = tbInput.Text;
-
-            List<string> separated = text.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries).ToList();
-            if (separated[0] == "")
+            if (tbInput.Text != string.Empty)
             {
-                separated.RemoveAt(0);
+                string text = tbInput.Text;
+
+                List<string> separated = text.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries).ToList();
+                if (separated[0] == "")
+                {
+                    separated.RemoveAt(0);
+                }
+                if ((separated[0]) == "+" || separated[0] == "-")
+                {
+                    if (true)
+                    {
+
+                    }
+                    separated[0] += separated[1];
+                    separated.RemoveAt(1);
+                }
+                if (separated[separated.Count - 1] == "" && (separated[separated.Count - 2] == "+" || separated[separated.Count - 2] == "-" || separated[separated.Count - 2] == "/" || separated[separated.Count - 2] == "*" || separated[separated.Count - 2] == "^"))
+                {
+                    if (lblResult.Text != "Output")
+                    {
+                        separated.RemoveAt(separated.Count - 1);
+                        separated.Add(lblResult.Text);
+                    }
+                    else
+                    {
+                        separated.RemoveAt(separated.Count - 1);
+                        separated.RemoveAt(separated.Count - 1);
+                    }
+
+                }
+
+                while (separated.Contains("*") || separated.Contains("/") || separated.Contains("+") || separated.Contains("-") || separated.Contains("^") || separated.Contains("√"))
+                {
+                    if (separated.Contains("√"))
+                    {
+                        
+                        int indexOfRoot = separated.IndexOf("√");
+                        double number = Math.Sqrt(double.Parse(separated[indexOfRoot + 1]));
+                        separated.Insert(indexOfRoot + 2, number.ToString());
+                        if (indexOfRoot==0)
+                        {
+                            
+                            separated.RemoveRange(indexOfRoot , 2);
+                        }
+                        else if (separated[indexOfRoot-1]== "-")
+                        {
+                            separated.RemoveRange(indexOfRoot, 2);
+                        }
+                        else
+                        {
+                            
+                            separated.RemoveRange(indexOfRoot - 1, 3);
+                        }
+                        
+                    }
+                    else if (separated.Contains("*"))
+                    {
+                        int indexOfStar = separated.IndexOf("*");
+                        double number = double.Parse(separated[indexOfStar - 1]) * double.Parse(separated[indexOfStar + 1]);
+                        separated.Insert(indexOfStar + 2, number.ToString());
+                        separated.RemoveRange(indexOfStar - 1, 3);
+                    }
+                    else if (separated.Contains("/"))
+                    {
+                        int indexOfDivide = separated.IndexOf("/");
+
+                        double number = double.Parse(separated[indexOfDivide - 1]) / double.Parse(separated[indexOfDivide + 1]);
+                        separated.Insert(indexOfDivide + 2, number.ToString());
+                        separated.RemoveRange(indexOfDivide - 1, 3);
+                    }
+                    else if (separated.Contains("+"))
+                    {
+                        int indexOfPlus = separated.IndexOf("+");
+                        double number = double.Parse(separated[indexOfPlus - 1]) + double.Parse(separated[indexOfPlus + 1]);
+                        separated.Insert(indexOfPlus + 2, number.ToString());
+                        separated.RemoveRange(indexOfPlus - 1, 3);
+                    }
+                    else if (separated.Contains("-"))
+                    {
+                        if (separated.Count==2)
+                        {
+                            separated[0] += separated[1];
+                            double number = double.Parse(separated[0]);
+                            separated.RemoveAt(1);
+                            lblResult.Text = $"{number}";
+                        }
+                        else
+                        {
+                            int indexOfMinus = separated.IndexOf("-");
+                            double number = double.Parse(separated[indexOfMinus - 1]) - double.Parse(separated[indexOfMinus + 1]);
+                            separated.Insert(indexOfMinus + 2, number.ToString());
+                            separated.RemoveRange(indexOfMinus - 1, 3);
+                        }
+                        
+                    }
+                    else if (separated.Contains("^"))
+                    {
+                        int indexOfPower = separated.IndexOf("^");
+                        double number = Math.Pow(double.Parse(separated[indexOfPower - 1]), double.Parse(separated[indexOfPower + 1]));
+                        separated.Insert(indexOfPower + 2, number.ToString());
+                        separated.RemoveRange(indexOfPower - 1, 3);
+                    }
+                    
+
+
+                }
+
+                lblResult.Text = $"{double.Parse(separated[0]):f2}";
+                tbInput.Clear();
             }
-            if ((separated[0]) == "+" || separated[0] == "-")
-            {
-                separated[0] += separated[1];
-                separated.RemoveAt(1);
-            }
 
-            while (separated.Contains("*") || separated.Contains("/") || separated.Contains("+") || separated.Contains("-"))
-            {
-                if (separated.Contains("*"))
-                {
-                    int indexOfStar = separated.IndexOf("*");
-                    double number = double.Parse(separated[indexOfStar - 1]) * double.Parse(separated[indexOfStar + 1]);
-                    separated.Insert(indexOfStar + 2, number.ToString());
-                    separated.RemoveRange(indexOfStar - 1, 3);
-                }
-                else if (separated.Contains("/"))
-                {
-                    int indexOfDivide = separated.IndexOf("/");
-
-                    double number = double.Parse(separated[indexOfDivide - 1]) / double.Parse(separated[indexOfDivide + 1]);
-                    separated.Insert(indexOfDivide + 2, number.ToString());
-                    separated.RemoveRange(indexOfDivide - 1, 3);
-                }
-                else if (separated.Contains("+"))
-                {
-                    int indexOfPlus = separated.IndexOf("+");
-                    double number = double.Parse(separated[indexOfPlus - 1]) + double.Parse(separated[indexOfPlus + 1]);
-                    separated.Insert(indexOfPlus + 2, number.ToString());
-                    separated.RemoveRange(indexOfPlus - 1, 3);
-                }
-                else if (separated.Contains("-"))
-                {
-                    int indexOfMinus = separated.IndexOf("-");
-                    double number = double.Parse(separated[indexOfMinus - 1]) - double.Parse(separated[indexOfMinus + 1]);
-                    separated.Insert(indexOfMinus + 2, number.ToString());
-                    separated.RemoveRange(indexOfMinus - 1, 3);
-                }
-
-
-            }
-
-            lblResult.Text = $"{double.Parse(separated[0]):f2}";
-            tbInput.Clear();
         }
 
         private void btnBackspace_Click(object sender, EventArgs e)
@@ -265,5 +380,14 @@ namespace SimpleCalculator
 
 
         }
+
+
+
+        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+
+        }
+
+
     }
 }
