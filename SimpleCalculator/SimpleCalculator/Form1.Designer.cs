@@ -248,7 +248,7 @@ namespace SimpleCalculator
             // lblResult
             // 
             this.lblResult.AutoSize = true;
-            this.lblResult.Location = new System.Drawing.Point(24, 29);
+            this.lblResult.Location = new System.Drawing.Point(24, 36);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(39, 13);
             this.lblResult.TabIndex = 19;
@@ -307,7 +307,7 @@ namespace SimpleCalculator
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Calculator";
+            this.Text = "On-screen calculator";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

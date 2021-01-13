@@ -102,8 +102,11 @@ namespace SimpleCalculator
                 MessageBoxWarninDivideMultiplyPower();
                 return;
             }
-
             if (ValidatingRightOperators(tbInput))
+            {
+                return;
+            }
+            if (WrongSymbolsUnderSqrt(tbInput))
             {
                 return;
             }
@@ -114,13 +117,6 @@ namespace SimpleCalculator
         }
         private void btnSqrt_Click(object sender, EventArgs e)
         {
-            //if (tbInput.Text != string.Empty)
-            //{
-            //    if (ValidatingRightOperators(tbInput))
-            //    {
-            //        return;
-            //    }
-            //}
             tbInput.Text += " √ ";
             dotUsed = false;
         }
@@ -133,8 +129,11 @@ namespace SimpleCalculator
                 MessageBoxWarninDivideMultiplyPower();
                 return;
             }
-
             if (ValidatingRightOperators(tbInput))
+            {
+                return;
+            }
+            if (WrongSymbolsUnderSqrt(tbInput))
             {
                 return;
             }
@@ -154,12 +153,14 @@ namespace SimpleCalculator
                 MessageBoxWarninDivideMultiplyPower();
                 return;
             }
-
             if (ValidatingRightOperators(tbInput))
             {
                 return;
             }
-
+            if (WrongSymbolsUnderSqrt(tbInput))
+            {
+                return;
+            }
             tbInput.Text += " * ";
 
             dotUsed = false;
@@ -183,7 +184,7 @@ namespace SimpleCalculator
                     return;
                 }
             }
-           
+
             tbInput.Text += " - ";
             dotUsed = false;
         }
@@ -212,35 +213,6 @@ namespace SimpleCalculator
         private void btnClear_Click(object sender, EventArgs e)
         {
             tbInput.Clear();
-        }
-
-        public static void MessageBoxWarninDivideMultiplyPower()
-        {
-            MessageBox.Show("Не може уравнението да започва с този знак", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public static void MessageBoxCantTwoOperators()
-        {
-            MessageBox.Show("Не може два оператора един до друг", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public static bool ValidatingRightOperators(TextBox tbInput)
-        {
-            Console.InputEncoding = Encoding.Unicode;
-            Console.OutputEncoding = Encoding.Unicode;
-            if (tbInput.Text[tbInput.Text.Length - 1] == ' ' && (tbInput.Text[tbInput.Text.Length - 2] == '*'
-                || tbInput.Text[tbInput.Text.Length - 2] == '/'
-                || tbInput.Text[tbInput.Text.Length - 2] == '+'
-                || tbInput.Text[tbInput.Text.Length - 2] == '-'
-                || tbInput.Text[tbInput.Text.Length - 2] == '^'
-               
-                ))
-            {
-                MessageBoxCantTwoOperators();
-                return true;
-
-            }
-            return false;
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
@@ -282,25 +254,29 @@ namespace SimpleCalculator
                 {
                     if (separated.Contains("√"))
                     {
-                        
+
                         int indexOfRoot = separated.IndexOf("√");
+                        if (separated[indexOfRoot + 1] == "" && separated[indexOfRoot + 2] == "√")
+                        {
+                            indexOfRoot = separated.LastIndexOf("√");
+                        }
                         double number = Math.Sqrt(double.Parse(separated[indexOfRoot + 1]));
                         separated.Insert(indexOfRoot + 2, number.ToString());
-                        if (indexOfRoot==0)
+                        if (indexOfRoot == 0)
                         {
-                            
-                            separated.RemoveRange(indexOfRoot , 2);
+
+                            separated.RemoveRange(indexOfRoot, 2);
                         }
-                        else if (separated[indexOfRoot-1]== "-")
+                        else if (separated[indexOfRoot - 1] == "-")
                         {
                             separated.RemoveRange(indexOfRoot, 2);
                         }
                         else
                         {
-                            
+
                             separated.RemoveRange(indexOfRoot - 1, 3);
                         }
-                        
+
                     }
                     else if (separated.Contains("*"))
                     {
@@ -326,7 +302,7 @@ namespace SimpleCalculator
                     }
                     else if (separated.Contains("-"))
                     {
-                        if (separated.Count==2)
+                        if (separated.Count == 2)
                         {
                             separated[0] += separated[1];
                             double number = double.Parse(separated[0]);
@@ -340,7 +316,7 @@ namespace SimpleCalculator
                             separated.Insert(indexOfMinus + 2, number.ToString());
                             separated.RemoveRange(indexOfMinus - 1, 3);
                         }
-                        
+
                     }
                     else if (separated.Contains("^"))
                     {
@@ -349,7 +325,7 @@ namespace SimpleCalculator
                         separated.Insert(indexOfPower + 2, number.ToString());
                         separated.RemoveRange(indexOfPower - 1, 3);
                     }
-                    
+
 
 
                 }
@@ -381,13 +357,45 @@ namespace SimpleCalculator
 
         }
 
-
-
-        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        //Methods
+        static bool WrongSymbolsUnderSqrt(TextBox tbInput)
         {
 
+            if (tbInput.Text[tbInput.Text.Length - 2] == '√')
+            {
+                MessageBox.Show("Неправилен символ", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
         }
 
+        public static void MessageBoxWarninDivideMultiplyPower()
+        {
+            MessageBox.Show("Не може уравнението да започва с този знак", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        public static void MessageBoxCantTwoOperators()
+        {
+            MessageBox.Show("Не може два оператора един до друг", "Грешка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static bool ValidatingRightOperators(TextBox tbInput)
+        {
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+            if (tbInput.Text[tbInput.Text.Length - 1] == ' ' && (tbInput.Text[tbInput.Text.Length - 2] == '*'
+                || tbInput.Text[tbInput.Text.Length - 2] == '/'
+                || tbInput.Text[tbInput.Text.Length - 2] == '+'
+                || tbInput.Text[tbInput.Text.Length - 2] == '-'
+                || tbInput.Text[tbInput.Text.Length - 2] == '^'
+
+                ))
+            {
+                MessageBoxCantTwoOperators();
+                return true;
+
+            }
+            return false;
+        }
     }
 }
