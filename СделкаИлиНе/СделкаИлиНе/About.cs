@@ -19,10 +19,7 @@ namespace СделкаИлиНе
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void About_Load(object sender, EventArgs e)
@@ -37,5 +34,13 @@ namespace СделкаИлиНе
             rtbStudentInfo.Text = sb.ToString();
         }
 
+        private void About_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

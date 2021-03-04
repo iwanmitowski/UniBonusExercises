@@ -11,10 +11,22 @@ using System.Windows.Forms;
 
 namespace СделкаИлиНе
 {
+    //455, 431
+    //693, 609
+
+
+    // Da dobavq list ot string za highscore na klasa Player
+    // da suzdam listobx fill metod
+    // da cheta vsichkite igrachi v nachaloto na formata i da gi zapisvam v list vupreki povtorenieto
+    // da filvam pri smqna na indexa
+    // s izbranoto ime
+    //pri izbraniq obekt da razshirqvam formata da ima rtb i da se poqvqva buton skrii istoriqta pri skrivane na istoriqta da se vrustha 
+    // v nachalnata golemina
+
     public partial class HighScores : Form
     {
         Dictionary<string, Player> players = new Dictionary<string, Player>();
-        
+        List<Player> allThePlayers = new List<Player>();
 
         public HighScores()
         {
@@ -23,10 +35,7 @@ namespace СделкаИлиНе
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            this.Close();
         }
         public void FillCurrentPlayers()
         {
@@ -53,27 +62,99 @@ namespace СделкаИлиНе
                 {
                     players.Add(name, currentPlayer);
                 }
-
+                allThePlayers.Add(currentPlayer);
             }
         }
+        private string FillingWholeHistory()
+        {
+            StringBuilder sb = new StringBuilder();
+            lbHighScores.ClearSelected();
+            foreach (var p in allThePlayers.OrderByDescending(p => p.Prize))
+            {
+                sb.AppendLine(p.ToString());
+            }
+            return sb.ToString();
+        }
+        private void FillPlayerHistoryBySelectedIndex()
+        {
 
+            StringBuilder sb = new StringBuilder();
+
+            int index = lbHighScores.SelectedIndex;
+            if (index==-1)
+            {
+                rtbSelectedPlayerInfo.Text = string.Empty;
+
+               rtbSelectedPlayerInfo.Text= FillingWholeHistory();
+                return;
+            }
+
+            string selectedName = lbHighScores.Items[index].ToString();
+
+            string currentPlayerName = selectedName.Split('-', (char)StringSplitOptions.RemoveEmptyEntries).FirstOrDefault().Trim();
+            foreach (var p in allThePlayers.Where(x => x.Name == currentPlayerName).OrderByDescending(p => p.Prize))
+            {
+                sb.AppendLine(p.ToString());
+            }
+
+            rtbSelectedPlayerInfo.Text = sb.ToString();
+        }
         private void HighScores_Load(object sender, EventArgs e)
         {
             FillCurrentPlayers();
 
-            StringBuilder sb = new StringBuilder();
-
+            players = players.OrderByDescending(p => p.Value.Prize).ToDictionary(k => k.Key, v => v.Value);
             foreach (var player in players.OrderByDescending(p => p.Value.Prize))
             {
-                sb.AppendLine(player.Value.ToString());
-            }
 
-            rtbHighScores.Text = sb.ToString();
+                lbHighScores.Items.Add(player.Value.ToString());
+            }
+           
+            this.Width = 455;
+            this.Height = 431;
         }
 
         private void HighScores_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult res = MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult res = MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void lbHighScores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbSelectedPlayerInfo.Text = string.Empty;
+            FillPlayerHistoryBySelectedIndex();
+            rtbSelectedPlayerInfo.Visible = true;
+            btnHistory.Visible = true;
+            this.Width = 693;
+            this.Height = 609;
+        }
+
+        private void btnShowHistory_Click(object sender, EventArgs e)
+        {
+           
+            lbHighScores.ClearSelected();
+            FillPlayerHistoryBySelectedIndex();
+            rtbSelectedPlayerInfo.Visible = true;
+            btnHistory.Visible = true;
+            this.Width = 693;
+            this.Height = 609;
+        }
+
+        private void btnCloseHistory_Click(object sender, EventArgs e)
+        {
+            rtbSelectedPlayerInfo.Visible = false;
+            
+            this.Width = 455;
+            this.Height = 431;
+        }
+
+        private void HighScores_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Наистина ли искате да се върнете към менюто ?", "Изход", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res != DialogResult.Yes)
             {
                 e.Cancel = true;
