@@ -18,7 +18,7 @@ namespace СделкаИлиНе
         public string userName;
         static string[] prizes = new string[] { "00.10", "00.50", "20.00", "100.00", "300.00", "5000", "7500", "12000", "25000", "100000" };
         List<string> currentPrizes = prizes.ToList();
-        int[] arr = new int[10]; //Box Generation
+        int[] arr; //Box Generation
         int openedBoxes = 0;
         BankOffer bankOffer = new BankOffer();
         public static bool isAccepted = false; //Accepted bank offer
@@ -91,7 +91,7 @@ namespace СделкаИлиНе
         }
 
 
-        private void FillingBoxes()
+        private void FillingClosedBoxes()
         {
 
             for (int i = 0; i < 10; i++)
@@ -178,7 +178,7 @@ namespace СделкаИлиНе
         }
 
 
-        private void FillingClosedBoxes()
+        private void FillingOpenedBoxes()
         {
             for (int i = 0; i < 10; i++)
             {
@@ -250,8 +250,8 @@ namespace СделкаИлиНе
         private void DealOrNot_Load(object sender, EventArgs e)
         {
             arr = GeneratingBoxes();
-            FillingBoxes();
             FillingClosedBoxes();
+            FillingOpenedBoxes();
             HideLblPrizeBox();
             FillingScreenPrizes();
             lblPlayerName.Text = userName;

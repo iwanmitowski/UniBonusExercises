@@ -11,18 +11,6 @@ using System.Windows.Forms;
 
 namespace СделкаИлиНе
 {
-    //455, 431
-    //693, 609
-
-
-    // Da dobavq list ot string za highscore na klasa Player
-    // da suzdam listobx fill metod
-    // da cheta vsichkite igrachi v nachaloto na formata i da gi zapisvam v list vupreki povtorenieto
-    // da filvam pri smqna na indexa
-    // s izbranoto ime
-    //pri izbraniq obekt da razshirqvam formata da ima rtb i da se poqvqva buton skrii istoriqta pri skrivane na istoriqta da se vrustha 
-    // v nachalnata golemina
-
     public partial class HighScores : Form
     {
         Dictionary<string, Player> players = new Dictionary<string, Player>();
@@ -65,6 +53,20 @@ namespace СделкаИлиНе
                 allThePlayers.Add(currentPlayer);
             }
         }
+        private void HighScores_Load(object sender, EventArgs e)
+        {
+            FillCurrentPlayers();
+
+            players = players.OrderByDescending(p => p.Value.Prize).ToDictionary(k => k.Key, v => v.Value);
+            foreach (var player in players.OrderByDescending(p => p.Value.Prize))
+            {
+
+                lbHighScores.Items.Add(player.Value.ToString());
+            }
+
+            this.Width = 455;
+            this.Height = 431;
+        }
         private string FillingWholeHistory()
         {
             StringBuilder sb = new StringBuilder();
@@ -81,11 +83,11 @@ namespace СделкаИлиНе
             StringBuilder sb = new StringBuilder();
 
             int index = lbHighScores.SelectedIndex;
-            if (index==-1)
+            if (index == -1)
             {
                 rtbSelectedPlayerInfo.Text = string.Empty;
 
-               rtbSelectedPlayerInfo.Text= FillingWholeHistory();
+                rtbSelectedPlayerInfo.Text = FillingWholeHistory();
                 return;
             }
 
@@ -99,20 +101,7 @@ namespace СделкаИлиНе
 
             rtbSelectedPlayerInfo.Text = sb.ToString();
         }
-        private void HighScores_Load(object sender, EventArgs e)
-        {
-            FillCurrentPlayers();
 
-            players = players.OrderByDescending(p => p.Value.Prize).ToDictionary(k => k.Key, v => v.Value);
-            foreach (var player in players.OrderByDescending(p => p.Value.Prize))
-            {
-
-                lbHighScores.Items.Add(player.Value.ToString());
-            }
-           
-            this.Width = 455;
-            this.Height = 431;
-        }
 
         private void HighScores_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -135,7 +124,6 @@ namespace СделкаИлиНе
 
         private void btnShowHistory_Click(object sender, EventArgs e)
         {
-           
             lbHighScores.ClearSelected();
             FillPlayerHistoryBySelectedIndex();
             rtbSelectedPlayerInfo.Visible = true;
@@ -147,7 +135,7 @@ namespace СделкаИлиНе
         private void btnCloseHistory_Click(object sender, EventArgs e)
         {
             rtbSelectedPlayerInfo.Visible = false;
-            
+
             this.Width = 455;
             this.Height = 431;
         }
