@@ -48,20 +48,42 @@ namespace СделкаИлиНе
 
             this.Show();
         }
+       
+        private bool ValidateName()
+        {
+            int counter = 0;
+            foreach (var item in tbUserName.Text.ToCharArray())
+            {
+                if (item == ' ')
+                {
+                    counter++;
+                    continue;
+                }
+                if (!char.IsLetter(item))
+                {
+                    tbUserName.Text = string.Empty;
+                    return false;
+                }
+            }
+            if (counter > 1)
+            {
+                return false;
+            }
+            return true;
+        }
 
         private void tbUserName_TextChanged(object sender, EventArgs e)
         {
-
-
-            if (string.IsNullOrWhiteSpace(tbUserName.Text) || tbUserName.Text.Any(z => !char.IsLetter(z)))
-            {
-                btnStart.Enabled = false;
-                errorProvider1.SetError(tbUserName, "Полето с името не може да бъде празно или да съдържа числа и символи!");
-            }
-            else
+            if (ValidateName())
             {
                 btnStart.Enabled = true;
                 errorProvider1.SetError(tbUserName, null);
+            }
+            if ((string.IsNullOrWhiteSpace(tbUserName.Text.Trim())))
+            {
+                btnStart.Enabled = false;
+                errorProvider1.SetError(tbUserName, "Полето с името не може да бъде празно или да съдържа числа и символи!");
+
             }
         }
 
@@ -71,7 +93,7 @@ namespace СделкаИлиНе
             this.Hide();
 
             DealOrNot dealOrNot = new СделкаИлиНе.DealOrNot();
-            dealOrNot.userName = tbUserName.Text;
+            dealOrNot.userName = tbUserName.Text.Trim();
 
 
             dealOrNot.ShowDialog();
