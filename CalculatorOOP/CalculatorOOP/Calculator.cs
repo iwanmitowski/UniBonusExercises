@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CalculatorOOP
 {
-    //The calculator performs operations in the order of entry, not by algebra priority. 
+    //The calculator performs operations in the order of entry, not by algebra priority!
     public partial class Calculator : Form
     {
         double result;
