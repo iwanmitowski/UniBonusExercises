@@ -29,7 +29,7 @@ namespace CalculatorOOP
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             lblM.Text = string.Empty;
             lblEquation.Text = string.Empty;
-            
+
             for (int i = 0; i < this.Controls.Count; i++)
             {
                 var control = this.Controls[i];
@@ -209,7 +209,8 @@ namespace CalculatorOOP
         }
 
         private void buttonMMinus_Click(object sender, EventArgs e)
-        {;
+        {
+            ;
             buttonResult.PerformClick();
             memory -= result;
             lblM.Text = "M";
@@ -233,6 +234,62 @@ namespace CalculatorOOP
             result += Math.Round(Math.Sqrt(double.Parse(tbResult.Text)), 6);
             lblEquation.Text = @operator + tbResult.Text;
             tbResult.Text = result.ToString();
+        }
+
+        //No idea why it's not working
+        private void Calculator_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar.ToString())
+            {
+                case "0":
+                    button10.PerformClick();
+                    break;
+                case "1":
+                    button1.PerformClick();
+                    break;
+                case "2":
+                    button2.PerformClick();
+                    break;
+                case "3":
+                    button3.PerformClick();
+                    break;
+                case "4":
+                    button4.PerformClick();
+                    break;
+                case "5":
+                    button5.PerformClick();
+                    break;
+                case "6":
+                    button6.PerformClick();
+                    break;
+                case "7":
+                    button7.PerformClick();
+                    break;
+                case "8":
+                    button8.PerformClick();
+                    break;
+                case "9":
+                    button9.PerformClick();
+                    break;
+                case ".":
+                    buttonDot.PerformClick();
+                    break;
+                case "+":
+                    buttonPlus.PerformClick();
+                    break;
+                case "-":
+                    buttonMinus.PerformClick();
+                    break;
+                case "*":
+                    buttonMult.PerformClick();
+                    break;
+                case "/":
+                    buttonDivide.PerformClick();
+                    break;
+                case "=":
+                    buttonResult.PerformClick();
+                    break;
+            }
         }
     }
 }

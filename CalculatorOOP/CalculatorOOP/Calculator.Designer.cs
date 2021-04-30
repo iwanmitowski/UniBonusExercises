@@ -298,8 +298,10 @@ namespace CalculatorOOP
             this.tbResult.Location = new System.Drawing.Point(34, 40);
             this.tbResult.MaxLength = 13;
             this.tbResult.Name = "tbResult";
+            this.tbResult.ReadOnly = true;
             this.tbResult.Size = new System.Drawing.Size(380, 29);
             this.tbResult.TabIndex = 18;
+            this.tbResult.Text = "0";
             this.tbResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblEquation
@@ -401,6 +403,7 @@ namespace CalculatorOOP
             this.Name = "Calculator";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Calculator_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Calculator_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
