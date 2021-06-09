@@ -54,6 +54,9 @@ namespace CalculatorOOP
             this.buttonMMinus = new System.Windows.Forms.Button();
             this.buttonMPlus = new System.Windows.Forms.Button();
             this.lblM = new System.Windows.Forms.Label();
+            this.buttonPow = new System.Windows.Forms.Button();
+            this.buttonPlusMinus = new System.Windows.Forms.Button();
+            this.buttonBackspace = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -61,7 +64,7 @@ namespace CalculatorOOP
             this.button1.BackColor = System.Drawing.Color.DimGray;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(34, 203);
+            this.button1.Location = new System.Drawing.Point(23, 339);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 56);
             this.button1.TabIndex = 0;
@@ -74,7 +77,7 @@ namespace CalculatorOOP
             this.button2.BackColor = System.Drawing.Color.DimGray;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(98, 203);
+            this.button2.Location = new System.Drawing.Point(87, 339);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(58, 56);
             this.button2.TabIndex = 1;
@@ -87,7 +90,7 @@ namespace CalculatorOOP
             this.button3.BackColor = System.Drawing.Color.DimGray;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(162, 203);
+            this.button3.Location = new System.Drawing.Point(151, 339);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(58, 56);
             this.button3.TabIndex = 2;
@@ -100,7 +103,7 @@ namespace CalculatorOOP
             this.button4.BackColor = System.Drawing.Color.DimGray;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(34, 141);
+            this.button4.Location = new System.Drawing.Point(23, 277);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(58, 56);
             this.button4.TabIndex = 3;
@@ -113,7 +116,7 @@ namespace CalculatorOOP
             this.button5.BackColor = System.Drawing.Color.DimGray;
             this.button5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(98, 141);
+            this.button5.Location = new System.Drawing.Point(87, 277);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(58, 56);
             this.button5.TabIndex = 4;
@@ -126,7 +129,7 @@ namespace CalculatorOOP
             this.button6.BackColor = System.Drawing.Color.DimGray;
             this.button6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(162, 141);
+            this.button6.Location = new System.Drawing.Point(151, 277);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(58, 56);
             this.button6.TabIndex = 5;
@@ -139,7 +142,7 @@ namespace CalculatorOOP
             this.button7.BackColor = System.Drawing.Color.DimGray;
             this.button7.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(34, 79);
+            this.button7.Location = new System.Drawing.Point(23, 215);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(58, 56);
             this.button7.TabIndex = 6;
@@ -152,7 +155,7 @@ namespace CalculatorOOP
             this.button8.BackColor = System.Drawing.Color.DimGray;
             this.button8.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(98, 79);
+            this.button8.Location = new System.Drawing.Point(87, 215);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(58, 56);
             this.button8.TabIndex = 7;
@@ -165,7 +168,7 @@ namespace CalculatorOOP
             this.button9.BackColor = System.Drawing.Color.DimGray;
             this.button9.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(162, 79);
+            this.button9.Location = new System.Drawing.Point(151, 215);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(58, 56);
             this.button9.TabIndex = 8;
@@ -178,9 +181,9 @@ namespace CalculatorOOP
             this.button10.BackColor = System.Drawing.Color.DimGray;
             this.button10.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button10.ForeColor = System.Drawing.Color.White;
-            this.button10.Location = new System.Drawing.Point(34, 265);
+            this.button10.Location = new System.Drawing.Point(87, 401);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(122, 56);
+            this.button10.Size = new System.Drawing.Size(58, 56);
             this.button10.TabIndex = 9;
             this.button10.Text = "button0";
             this.button10.UseVisualStyleBackColor = false;
@@ -191,7 +194,7 @@ namespace CalculatorOOP
             this.buttonDot.BackColor = System.Drawing.Color.DimGray;
             this.buttonDot.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDot.ForeColor = System.Drawing.Color.White;
-            this.buttonDot.Location = new System.Drawing.Point(162, 265);
+            this.buttonDot.Location = new System.Drawing.Point(151, 401);
             this.buttonDot.Name = "buttonDot";
             this.buttonDot.Size = new System.Drawing.Size(58, 56);
             this.buttonDot.TabIndex = 10;
@@ -204,9 +207,9 @@ namespace CalculatorOOP
             this.buttonPlus.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonPlus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonPlus.ForeColor = System.Drawing.Color.White;
-            this.buttonPlus.Location = new System.Drawing.Point(228, 141);
+            this.buttonPlus.Location = new System.Drawing.Point(215, 339);
             this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(58, 180);
+            this.buttonPlus.Size = new System.Drawing.Size(58, 56);
             this.buttonPlus.TabIndex = 11;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = false;
@@ -217,7 +220,7 @@ namespace CalculatorOOP
             this.buttonMinus.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonMinus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMinus.ForeColor = System.Drawing.Color.White;
-            this.buttonMinus.Location = new System.Drawing.Point(292, 203);
+            this.buttonMinus.Location = new System.Drawing.Point(215, 277);
             this.buttonMinus.Name = "buttonMinus";
             this.buttonMinus.Size = new System.Drawing.Size(58, 56);
             this.buttonMinus.TabIndex = 12;
@@ -230,7 +233,7 @@ namespace CalculatorOOP
             this.buttonMult.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonMult.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMult.ForeColor = System.Drawing.Color.White;
-            this.buttonMult.Location = new System.Drawing.Point(292, 79);
+            this.buttonMult.Location = new System.Drawing.Point(215, 215);
             this.buttonMult.Name = "buttonMult";
             this.buttonMult.Size = new System.Drawing.Size(58, 56);
             this.buttonMult.TabIndex = 13;
@@ -243,7 +246,7 @@ namespace CalculatorOOP
             this.buttonDivide.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonDivide.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDivide.ForeColor = System.Drawing.Color.White;
-            this.buttonDivide.Location = new System.Drawing.Point(292, 141);
+            this.buttonDivide.Location = new System.Drawing.Point(215, 153);
             this.buttonDivide.Name = "buttonDivide";
             this.buttonDivide.Size = new System.Drawing.Size(58, 56);
             this.buttonDivide.TabIndex = 14;
@@ -256,7 +259,7 @@ namespace CalculatorOOP
             this.buttonSqrt.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonSqrt.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonSqrt.ForeColor = System.Drawing.Color.White;
-            this.buttonSqrt.Location = new System.Drawing.Point(228, 79);
+            this.buttonSqrt.Location = new System.Drawing.Point(151, 153);
             this.buttonSqrt.Name = "buttonSqrt";
             this.buttonSqrt.Size = new System.Drawing.Size(58, 56);
             this.buttonSqrt.TabIndex = 15;
@@ -269,7 +272,7 @@ namespace CalculatorOOP
             this.buttonClear.BackColor = System.Drawing.Color.Silver;
             this.buttonClear.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonClear.ForeColor = System.Drawing.Color.Black;
-            this.buttonClear.Location = new System.Drawing.Point(356, 79);
+            this.buttonClear.Location = new System.Drawing.Point(151, 91);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(58, 56);
             this.buttonClear.TabIndex = 16;
@@ -282,7 +285,7 @@ namespace CalculatorOOP
             this.buttonResult.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonResult.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonResult.ForeColor = System.Drawing.Color.White;
-            this.buttonResult.Location = new System.Drawing.Point(292, 265);
+            this.buttonResult.Location = new System.Drawing.Point(215, 401);
             this.buttonResult.Name = "buttonResult";
             this.buttonResult.Size = new System.Drawing.Size(58, 56);
             this.buttonResult.TabIndex = 17;
@@ -295,11 +298,11 @@ namespace CalculatorOOP
             this.tbResult.BackColor = System.Drawing.Color.Black;
             this.tbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbResult.ForeColor = System.Drawing.Color.White;
-            this.tbResult.Location = new System.Drawing.Point(34, 40);
+            this.tbResult.Location = new System.Drawing.Point(25, 41);
             this.tbResult.MaxLength = 13;
             this.tbResult.Name = "tbResult";
             this.tbResult.ReadOnly = true;
-            this.tbResult.Size = new System.Drawing.Size(380, 29);
+            this.tbResult.Size = new System.Drawing.Size(248, 29);
             this.tbResult.TabIndex = 18;
             this.tbResult.Text = "0";
             this.tbResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -310,7 +313,7 @@ namespace CalculatorOOP
             this.lblEquation.BackColor = System.Drawing.Color.Black;
             this.lblEquation.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEquation.ForeColor = System.Drawing.Color.LightGray;
-            this.lblEquation.Location = new System.Drawing.Point(43, 43);
+            this.lblEquation.Location = new System.Drawing.Point(34, 44);
             this.lblEquation.Name = "lblEquation";
             this.lblEquation.Size = new System.Drawing.Size(104, 24);
             this.lblEquation.TabIndex = 19;
@@ -319,9 +322,9 @@ namespace CalculatorOOP
             // buttonMResult
             // 
             this.buttonMResult.BackColor = System.Drawing.Color.DarkSalmon;
-            this.buttonMResult.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMResult.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMResult.ForeColor = System.Drawing.Color.White;
-            this.buttonMResult.Location = new System.Drawing.Point(356, 141);
+            this.buttonMResult.Location = new System.Drawing.Point(23, 153);
             this.buttonMResult.Name = "buttonMResult";
             this.buttonMResult.Size = new System.Drawing.Size(58, 56);
             this.buttonMResult.TabIndex = 20;
@@ -334,7 +337,7 @@ namespace CalculatorOOP
             this.buttonMMinus.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonMMinus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMMinus.ForeColor = System.Drawing.Color.White;
-            this.buttonMMinus.Location = new System.Drawing.Point(356, 203);
+            this.buttonMMinus.Location = new System.Drawing.Point(87, 91);
             this.buttonMMinus.Name = "buttonMMinus";
             this.buttonMMinus.Size = new System.Drawing.Size(58, 56);
             this.buttonMMinus.TabIndex = 21;
@@ -347,7 +350,7 @@ namespace CalculatorOOP
             this.buttonMPlus.BackColor = System.Drawing.Color.DarkSalmon;
             this.buttonMPlus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMPlus.ForeColor = System.Drawing.Color.White;
-            this.buttonMPlus.Location = new System.Drawing.Point(356, 265);
+            this.buttonMPlus.Location = new System.Drawing.Point(23, 91);
             this.buttonMPlus.Name = "buttonMPlus";
             this.buttonMPlus.Size = new System.Drawing.Size(58, 56);
             this.buttonMPlus.TabIndex = 22;
@@ -361,18 +364,60 @@ namespace CalculatorOOP
             this.lblM.BackColor = System.Drawing.Color.Black;
             this.lblM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblM.ForeColor = System.Drawing.Color.White;
-            this.lblM.Location = new System.Drawing.Point(34, 9);
+            this.lblM.Location = new System.Drawing.Point(25, 10);
             this.lblM.Name = "lblM";
             this.lblM.Size = new System.Drawing.Size(60, 24);
             this.lblM.TabIndex = 23;
             this.lblM.Text = "label1";
+            // 
+            // buttonPow
+            // 
+            this.buttonPow.BackColor = System.Drawing.Color.DarkSalmon;
+            this.buttonPow.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonPow.ForeColor = System.Drawing.Color.White;
+            this.buttonPow.Location = new System.Drawing.Point(87, 153);
+            this.buttonPow.Name = "buttonPow";
+            this.buttonPow.Size = new System.Drawing.Size(58, 56);
+            this.buttonPow.TabIndex = 24;
+            this.buttonPow.Text = "x²";
+            this.buttonPow.UseVisualStyleBackColor = false;
+            this.buttonPow.Click += new System.EventHandler(this.Operators_click);
+            // 
+            // buttonPlusMinus
+            // 
+            this.buttonPlusMinus.BackColor = System.Drawing.Color.DarkSalmon;
+            this.buttonPlusMinus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonPlusMinus.ForeColor = System.Drawing.Color.White;
+            this.buttonPlusMinus.Location = new System.Drawing.Point(23, 401);
+            this.buttonPlusMinus.Name = "buttonPlusMinus";
+            this.buttonPlusMinus.Size = new System.Drawing.Size(58, 56);
+            this.buttonPlusMinus.TabIndex = 25;
+            this.buttonPlusMinus.Text = "+/-";
+            this.buttonPlusMinus.UseVisualStyleBackColor = false;
+            this.buttonPlusMinus.Click += new System.EventHandler(this.buttonPlusMinus_Click);
+            // 
+            // buttonBackspace
+            // 
+            this.buttonBackspace.BackColor = System.Drawing.Color.DarkSalmon;
+            this.buttonBackspace.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBackspace.ForeColor = System.Drawing.Color.White;
+            this.buttonBackspace.Location = new System.Drawing.Point(215, 91);
+            this.buttonBackspace.Name = "buttonBackspace";
+            this.buttonBackspace.Size = new System.Drawing.Size(58, 56);
+            this.buttonBackspace.TabIndex = 26;
+            this.buttonBackspace.Text = "<--";
+            this.buttonBackspace.UseVisualStyleBackColor = false;
+            this.buttonBackspace.Click += new System.EventHandler(this.buttonBackspace_Click);
             // 
             // Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(447, 347);
+            this.ClientSize = new System.Drawing.Size(295, 476);
+            this.Controls.Add(this.buttonBackspace);
+            this.Controls.Add(this.buttonPlusMinus);
+            this.Controls.Add(this.buttonPow);
             this.Controls.Add(this.lblM);
             this.Controls.Add(this.buttonMPlus);
             this.Controls.Add(this.buttonMMinus);
@@ -435,6 +480,9 @@ namespace CalculatorOOP
         private System.Windows.Forms.Button buttonMMinus;
         private System.Windows.Forms.Button buttonMPlus;
         private System.Windows.Forms.Label lblM;
+        private System.Windows.Forms.Button buttonPow;
+        private System.Windows.Forms.Button buttonPlusMinus;
+        private System.Windows.Forms.Button buttonBackspace;
     }
 }
 

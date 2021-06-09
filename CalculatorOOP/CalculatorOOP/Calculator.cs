@@ -42,7 +42,7 @@ namespace CalculatorOOP
 
         private void ButtonNumbers_Click(object sender, EventArgs e)
         {
-            if ((tbResult.Text == "0") || (isOperator))
+            if (tbResult.Text == "0" || (isOperator))
             {
                 tbResult.Clear();
             }
@@ -54,6 +54,10 @@ namespace CalculatorOOP
             {
                 if (!tbResult.Text.Contains("."))
                 {
+                    if (tbResult.Text==string.Empty)
+                    {
+                        tbResult.Text = "0";
+                    }
                     tbResult.Text += b.Text;
                 }
             }
@@ -79,13 +83,21 @@ namespace CalculatorOOP
                         Sqrt();
                         return;
                     }
+                    else if (previousOperator == "x²" || @operator == "x²")
+                    {
+                        //result = double.Parse(tbResult.Text);
+                        Pow();
+                        return;
+                    }
+
                     lblEquation.Text = result + " " + @operator;
+
                 }
                 else
                 {
                     buttonResult.PerformClick();
                     isOperator = true;
-                    lblEquation.Text = result + " " + @operator;
+                    lblEquation.Text = @operator == "x²" ? result + "²" : result + " " + @operator;
                 }
             }
             else
@@ -108,8 +120,18 @@ namespace CalculatorOOP
                     Sqrt();
                     return;
                 }
-                result = double.Parse(tbResult.Text);
-                lblEquation.Text = result + " " + @operator;
+                else if (@operator == "x²")
+                {
+                    Pow();
+                    return;
+                }
+                else
+                {
+                    result = double.Parse(tbResult.Text);
+                    lblEquation.Text = result + " " + @operator;
+                }
+
+
             }
         }
 
@@ -142,29 +164,56 @@ namespace CalculatorOOP
                         switch (previousOperator)
                         {
                             case "+":
-                                tbResult.Text = (result += Math.Round(Math.Sqrt(number), 6)).ToString();
+                                tbResult.Text = (result += Math.Round(Math.Sqrt(number), 4)).ToString();
                                 break;
                             case "-":
-                                tbResult.Text = (result -= Math.Round(Math.Sqrt(number), 6)).ToString();
+                                tbResult.Text = (result -= Math.Round(Math.Sqrt(number), 4)).ToString();
                                 break;
                             case "*":
-                                tbResult.Text = (result *= Math.Round(Math.Sqrt(number), 6)).ToString();
+                                tbResult.Text = (result *= Math.Round(Math.Sqrt(number), 4)).ToString();
                                 break;
                             case "/":
                                 if (tbResult.Text == "0")
                                 {
                                     throw new DivideByZeroException();
                                 }
-                                tbResult.Text = (result /= Math.Round(Math.Sqrt(number), 6)).ToString();
+                                tbResult.Text = (result /= Math.Round(Math.Sqrt(number), 4)).ToString();
+                                break;
+                            default:
+                                tbResult.Text = (Math.Round(Math.Sqrt(number), 4)).ToString();
                                 break;
                         }
                         break;
-                    default:
+                    case "x²":
+                        result = number;
+                        switch (previousOperator)
+                        {
+                            case "+":
+                                tbResult.Text = (result += Math.Round(Math.Pow(number, 2), 4)).ToString();
+                                break;
+                            case "-":
+                                tbResult.Text = (result -= Math.Round(Math.Pow(number, 2), 4)).ToString();
+                                break;
+                            case "*":
+                                tbResult.Text = (result *= Math.Round(Math.Pow(number, 2), 4)).ToString();
+                                break;
+                            case "/":
+                                if (tbResult.Text == "0")
+                                {
+                                    throw new DivideByZeroException();
+                                }
+                                tbResult.Text = (result /= Math.Round(Math.Pow(number, 2), 4)).ToString();
+                                break;
+                            default:
+                                tbResult.Text =  (Math.Round(Math.Pow(number, 2), 4)).ToString();
+                                break;
+                        }
+                        //tbResult.Text = (Math.Pow(number, 2)).ToString();
                         break;
                 }
 
                 result = number;
-                @operator = "";
+                @operator = @operator != "x²" ? "" : "x²";
                 isOperator = true;
             }
             catch (DivideByZeroException dex)
@@ -216,6 +265,13 @@ namespace CalculatorOOP
             lblM.Text = "M";
         }
 
+        private void Pow()
+        {
+            lblEquation.Text = tbResult.Text + "²";
+
+            result = Math.Round(Math.Pow(double.Parse(tbResult.Text), 2), 4);
+            tbResult.Text = result.ToString();
+        }
 
         private void Sqrt()
         {
@@ -231,7 +287,7 @@ namespace CalculatorOOP
                 return;
             }
 
-            result += Math.Round(Math.Sqrt(double.Parse(tbResult.Text)), 6);
+            result = Math.Round(Math.Sqrt(double.Parse(tbResult.Text)), 4);
             lblEquation.Text = @operator + tbResult.Text;
             tbResult.Text = result.ToString();
         }
@@ -289,6 +345,38 @@ namespace CalculatorOOP
                 case "=":
                     buttonResult.PerformClick();
                     break;
+            }
+        }
+
+        private void buttonPlusMinus_Click(object sender, EventArgs e)
+        {
+            if (tbResult.Text.Contains("-"))
+            {
+                tbResult.Text = tbResult.Text.Substring(1);
+            }
+            else
+            {
+                tbResult.Text = "-" + tbResult.Text;
+            }
+        }
+
+        private void buttonBackspace_Click(object sender, EventArgs e)
+        {
+            
+            int length = tbResult.Text.Length-1;
+
+            if (length==-1)
+            {
+                return;
+            }
+
+            tbResult.Text = tbResult.Text.Substring(0,length);
+
+            if (length==0)
+            {
+                lblEquation.Text = string.Empty;
+                @operator = "";
+                previousOperator = "";
             }
         }
     }
