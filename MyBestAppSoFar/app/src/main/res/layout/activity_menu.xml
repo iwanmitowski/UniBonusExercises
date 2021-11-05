@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MenuActivity">
+
+    <Button
+        android:id="@+id/helloWorldBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:text="Hello World" />
+
+    <Button
+        android:id="@+id/calculatorBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:text="Calculator" />
+
+    <Button
+        android:id="@+id/gameBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:text="Game" />
+
+    <Button
+        android:id="@+id/shoppingListBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:text="Shopping List" />
+
+</LinearLayout>
